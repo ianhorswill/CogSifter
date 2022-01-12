@@ -1,0 +1,2 @@
+[main]
+Capitalist: [OwnsBusiness ?who ?what] ?who owns ?what.

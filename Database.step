@@ -1,0 +1,62 @@
+initially:
+    [SIONFile savedata ?db] [set Database = ?db]
+    [DefineEntityType "Person" person Database]
+    [DefineEntityType "Business" biz Database]
+    [TranslateEnumeration PersonType g gender [null male female] 1]
+    [DeprefixTraitList PersonType traitIds traits trait\-]
+    [CleanKeysWithPrefix PersonType future]
+    [GetPath Database "simman rels data" ?relations] [set Relations = ?relations]
+    [TranslateRelationshipTypes Relations]
+[end]
+
+[predicate][main]
+Male ?p: [Person ?p] [?p gender male]
+
+[predicate][main]
+Female ?p: [Person ?p] [?p gender female]
+[predicate][main]
+FirstName ?p ?name: [Person ?p] [?p first ?name]
+[predicate][main]
+LastName ?p ?name: [Person ?p] [?p last ?name]
+
+[predicate][main]
+Trait ?who ?what: [Person ?who] [?who traits ?traits] [?traits ?what]
+
+[predicate][main]
+Ethnicity ?who ?what: [Person ?who] [?who eth ?what]
+
+[predicate][main]
+OwnsBusiness ?person ?business: [Person ?person] [?person business ?bi] [BusinessIndex ?bi ?business] 
+
+[predicate]
+Relationship ?from ?to ?type ?rel:
+    [Relations ?r] [?r sourceId ?fi] [PersonIndex ?fi ?from]
+    [?r data ?d] [?d ?rel] [?rel type ?type]
+    [?rel to ?ti] [PersonIndex ?ti ?to]
+[end]
+
+[predicate]
+RelationshipBuff ?rel ?buffid ?crewpeep:
+    [?rel buffs ?buffInfo] [?buffInfo states ?bufflist] [?bufflist ?buff]
+    [?buff crewpeep ?pi] [PersonIndex ?pi ?crewpeep]
+    [?buff id ?buffid]
+[end]
+
+[predicate]
+RelationshipHistory ?rel ?id ?entity ?valence:
+    [?rel socialhistory ?history] [?history items ?events] [?events ?event]
+    [?event entityCtx ?pi] [PersonIndex ?pi ?entity]
+    [?event defid ?id] [?event valence ?valence]
+[end]
+
+[predicate][main]
+RelationBuff ?from ?to ?type ?crewpeep ?buffid:
+    [Relationship ?from ?to ?type ?rel]
+    [RelationshipBuff ?rel ?buffid ?crewpeep]
+[end]
+
+[predicate][main]
+RelationHistory ?from ?to ?type ?id ?entity ?valence:
+    [Relationship ?from ?to ?type ?rel]
+    [RelationshipHistory ?rel ?id ?entity ?valence]
+[end]

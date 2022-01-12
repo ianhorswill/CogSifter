@@ -1,0 +1,3 @@
+Mention (Var ?x): ?x/Write
+Mention (Person ?x): ?x/FirstName/Write ?x/LastName/Write
+Mention (Business ?x): [?x bizname ?n] ?n/Write
