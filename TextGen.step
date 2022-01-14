@@ -1,2 +1,4 @@
 [main]
-Capitalist: [OwnsBusiness ?who ?what] ?who owns ?what.
+Capitalist ?who: [OwnsBusiness ?who ?what] ?who owns ?what.
+
+Killing: [Killed ?killer ?killee] ?killer of ?killer/GangOf/GangName/Write killed ?killee of ?killee/GangOf/GangName/Write.

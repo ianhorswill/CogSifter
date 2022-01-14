@@ -1,3 +1,8 @@
 Mention (Var ?x): ?x/Write
-Mention (Person ?x): ?x/FirstName/Write ?x/LastName/Write
+Mention (Person ?x): ?x/Honorific ?x/FirstName/Write ?x/LastName/Write
 Mention (Business ?x): [?x bizname ?n] ?n/Write
+
+Honorific ?x: [?x title ?t] ?t/Write
+Honorific (Male ?): Mr.
+Honorific (Married ?): Mrs.
+Honorific ?: Miss
