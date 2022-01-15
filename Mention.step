@@ -28,7 +28,7 @@ MentionRest ?x: [MentionGeneral ?x]
 
 # Handles printing of things that don't need to be special cased for their first mention.
 MentionGeneral (Business ?x): [?x bizname ?n] ?n/Write [set It = ?x]
-MentionGeneral (Gang ?x): [df] ?x/GangName/Write [set Them = ?x]
+MentionGeneral (Gang ?x): ?x/GangName/Write [set Them = ?x]
 MentionGeneral ?x: [Write ?x]
 
 # Update Him/Her to reflect that we just mentioned this person.

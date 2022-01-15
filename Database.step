@@ -15,6 +15,9 @@ initially:
     [DefineSlotPredicate "Ethnicity" eth PersonType]
     [DefineIndexedSlotPredicate "OwnsBusiness" PersonType business BusinessType]
     [DefineIndexedSlotPredicate "GangOf" PersonType pid GangType]
+    [DefineRelationPredicate "Relationship" Database PersonType]
+    [DefineRelationPredicateWithKey "RelationshipWithBuffs" Database PersonType buffs]
+    [DefineRelationPredicateWithKey "RelationshipWithSocialHistory" Database PersonType socialhistory]
 [end]
 
 [predicate][main]
@@ -33,13 +36,6 @@ Spouse ?who ?spouse: [Relationship ?who ?spouse spouse ?]
 Married ?who: [Spouse ?who ?]
 
 [predicate]
-Relationship ?from ?to ?type ?rel:
-    [Relations ?r] [?r sourceId ?fi] [PersonIndex ?fi ?from]
-    [?r data ?d] [?d ?rel] [?rel type ?type]
-    [?rel to ?ti] [PersonIndex ?ti ?to]
-[end]
-
-[predicate]
 RelationshipBuff ?rel ?buffid ?crewpeep:
     [?rel buffs ?buffInfo] [?buffInfo states ?bufflist] [?bufflist ?buff]
     [?buff crewpeep ?pi] [PersonIndex ?pi ?crewpeep]
@@ -55,13 +51,13 @@ RelationshipHistory ?rel ?id ?entity ?valence:
 
 [predicate][main]
 RelationBuff ?from ?to ?type ?crewpeep ?buffid:
-    [Relationship ?from ?to ?type ?rel]
+    [RelationshipWithBuffs ?from ?to ?type ?rel]
     [RelationshipBuff ?rel ?buffid ?crewpeep]
 [end]
 
 [predicate][main]
 RelationHistory ?from ?to ?type ?id ?entity ?valence:
-    [Relationship ?from ?to ?type ?rel]
+    [RelationshipWithSocialHistory ?from ?to ?type ?rel]
     [RelationshipHistory ?rel ?id ?entity ?valence]
 [end]
 
