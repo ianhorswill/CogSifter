@@ -2,7 +2,7 @@ initially:
     [SIONFile savedata ?db] [set Database = ?db]
     [DefineEntityType "Person" person Database]
     [DefineEntityType "Business" biz Database]
-    [DefineEntityType "Gang" player Database]
+    [DefineEntityType "Gang" gang Database]
     [TranslateEnumeration PersonType g gender [null male female] 1]
     [DeprefixTraitList PersonType traitIds traits trait\-]
     [CleanKeysWithPrefix PersonType future]

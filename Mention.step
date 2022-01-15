@@ -1,8 +1,56 @@
-Mention (Var ?x): ?x/Write
-Mention (Person ?x): ?x/Honorific ?x/FirstName/Write ?x/LastName/Write
-Mention (Business ?x): [?x bizname ?n] ?n/Write
+initially: [set It = nothing] [set Him = nothing] [set Her = nothing] [set Them = nothing]
+# Whether ?x has come up previously in our text.
+fluent Mentioned ?x.
 
+# This gets called whenever you say ?variable in the middle of some text.
+# For example "?x says hi" really means "[Mention ?x] says hi".
+Mention (Var ?x): ?x/Write
+Mention It: it
+Mention Him: he
+Mention Her: she
+Mention Them: they
+Mention (Mentioned ?x): [MentionRest ?x]
+Mention ?x: [now [Mentioned ?x]] [MentionFirst ?x]
+
+# Handles the first mention of an object
+MentionFirst (Person ?x): ?x/Honorific ?x/FirstName/Write ?x/LastName/Write [NotePersonPronouns ?x] [PersonDetailClause ?x]
+MentionFirst ?x: [MentionGeneral ?x]
+
+# Generates an identifying detail about a person, as might appear in the first mention of
+# someone in a news story, e.g. "Steve Jobs, owner of Apple Computer,"
+PersonDetailClause ?x: [GangOf ?x ?g] of ?g
+PersonDetailClause ?x: [OwnsBusiness ?x ?b], owner of ?b,
+PersonDetailClause ?.
+
+# Handles the printing of things that have already been mentioned once.
+MentionRest (Person ?x): ?x/Honorific ?x/LastName/Write [NotePersonPronouns ?x]
+MentionRest ?x: [MentionGeneral ?x]
+
+# Handles printing of things that don't need to be special cased for their first mention.
+MentionGeneral (Business ?x): [?x bizname ?n] ?n/Write [set It = ?x]
+MentionGeneral (Gang ?x): [df] ?x/GangName/Write [set Them = ?x]
+MentionGeneral ?x: [Write ?x]
+
+# Update Him/Her to reflect that we just mentioned this person.
+NotePersonPronouns (Male ?x): [set Him = ?x]
+NotePersonPronouns ?x: [set Her = ?x]
+
+# The honorific to print with someone's name when speaking formally.
 Honorific ?x: [?x title ?t] ?t/Write
 Honorific (Male ?): Mr.
 Honorific (Married ?): Mrs.
 Honorific ?: Miss
+
+Poss (Var ?x): ?x/Write
+Poss It: its
+Poss Him: his
+Poss Her: her
+Poss Them: their
+Poss ?x: ?x's
+
+Obj (Var ?x): ?x/Write
+Obj It: it
+Obj Him: him
+Obj Her: her
+Obj Them: them
+Obj ?x: ?x

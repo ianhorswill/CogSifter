@@ -1,4 +1,9 @@
 [main]
 Capitalist ?who: [OwnsBusiness ?who ?what] ?who owns ?what.
 
-Killing: [Killed ?killer ?killee] ?killer of ?killer/GangOf/GangName/Write killed ?killee of ?killee/GangOf/GangName/Write.
+Killing: [Killed ?killer ?killee] ?killer killed ?killee/Obj.  [Motive ?killer ?killee]
+
+[randomly]
+Motive ? ?v: ?v had been very naughty.
+Motive ?k ?: ?k was in a super bad mood.
+Motive ?k ?v: ?k wanted one of ?v/Poss french fries and ?v wouldn't share.
