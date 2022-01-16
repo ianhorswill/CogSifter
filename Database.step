@@ -15,6 +15,8 @@ initially:
     [DefineSlotPredicate "Ethnicity" eth PersonType]
     [DefineIndexedSlotPredicate "OwnsBusiness" PersonType business BusinessType]
     [DefineIndexedSlotPredicate "GangOf" PersonType pid GangType]
+    [DefineInModeIndexedSlotPredicate "CrewPeep" crewpeep PersonType]
+    [DefineInModeIndexedSlotPredicate "EntityCtx" entityCtx PersonType]
     [DefineRelationPredicate "Relationship" Database PersonType]
     [DefineRelationPredicateWithKey "RelationshipWithBuffs" Database PersonType buffs]
     [DefineRelationPredicateWithKey "RelationshipWithSocialHistory" Database PersonType socialhistory]
@@ -37,15 +39,15 @@ Married ?who: [Spouse ?who ?]
 
 [predicate]
 RelationshipBuff ?rel ?buffid ?crewpeep:
-    [?rel buffs ?buffInfo] [?buffInfo states ?bufflist] [?bufflist ?buff]
-    [?buff crewpeep ?pi] [PersonIndex ?pi ?crewpeep]
+    [GetPath ?rel "buffs states" ?bufflist] [?bufflist ?buff]
+    [CrewPeep ?buff ?crewpeep]
     [?buff id ?buffid]
 [end]
 
 [predicate]
 RelationshipHistory ?rel ?id ?entity ?valence:
-    [?rel socialhistory ?history] [?history items ?events] [?events ?event]
-    [?event entityCtx ?pi] [PersonIndex ?pi ?entity]
+    [GetPath ?rel "socialhistory items" ?events] [?events ?event]
+    [EntityCtx ?event ?entity]
     [?event defid ?id] [?event valence ?valence]
 [end]
 
@@ -79,7 +81,10 @@ GangName ?g ?n: [?g social ?s] [?s groupname ?n]
 Cop ?p: [Person ?p] [?p pid ?pid] [Precinct ? ?pid]
 
 [predicate]
-Killed ?agent ?patient: [RelationHistory ?patient ?agent ? killing ? ?]
+Killed ?agent ?patient: [RelationHistory ?patient ?agent ? killing ?patient ?]
+
+[predicate]
+MurderMotive ?killer ?victim [?act ?target]: [RelationHistory ?killer ?victim ? ?act ?target ?valence] [< ?valence 0]
 
 [predicate]
 UpsetAboutKilling ?experiencer ?killer ?victim: [RelationHistory ?experiencer ?killer ? killing\-inf ?victim ?]
