@@ -37,6 +37,9 @@ Spouse ?who ?spouse: [Relationship ?who ?spouse spouse ?]
 [predicate]
 Married ?who: [Spouse ?who ?]
 
+[main]
+Born ?who ?when: [?who born ?when]
+
 [predicate]
 RelationshipBuff ?rel ?buffid ?crewpeep:
     [GetPath ?rel "buffs states" ?bufflist] [?bufflist ?buff]
@@ -66,25 +69,25 @@ RelationHistory ?from ?to ?type ?id ?entity ?valence:
 [predicate]
 GangInfo ?e ?type ?pid: [Gang ?e] [?e type ?type] [?e pid ?pid]
 
-[predicate]
+[predicate] [main]
 PlayerGang ?p ?pid: [GangInfo ?p 1 ?pid]
-[predicate]
+[predicate] [main]
 Precinct ?p ?pid: [GangInfo ?p 2 ?pid]
-[predicate]
+[predicate] [main]
 AIGang ?p ?pid: [GangInfo ?p 3 ?pid]
-[predicate]
+[predicate] [main]
 AIHooligan ?p ?pid: [GangInfo ?p 4 ?pid]
 
 GangName ?g ?n: [?g social ?s] [?s groupname ?n]
 
-[predicate]
+[predicate] [main]
 Cop ?p: [Person ?p] [?p pid ?pid] [Precinct ? ?pid]
 
 [predicate]
 Killed ?agent ?patient: [RelationHistory ?patient ?agent ? killing ?patient ?]
 
-[predicate]
+[predicate] [main]
 MurderMotive ?killer ?victim [?act ?target]: [RelationHistory ?killer ?victim ? ?act ?target ?valence] [< ?valence 0]
 
-[predicate]
+[predicate] [main]
 UpsetAboutKilling ?experiencer ?killer ?victim: [RelationHistory ?experiencer ?killer ? killing\-inf ?victim ?]

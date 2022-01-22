@@ -1,6 +1,7 @@
 [main]
 Capitalist ?who: [OwnsBusiness ?who ?what] ?who owns ?what.
 
+[main]
 Killing: [Killed ?killer ?killee] ?killer killed ?killee/Obj.  [Motive ?killer ?killee]
 
 [randomly]
