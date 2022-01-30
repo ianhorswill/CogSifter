@@ -9,8 +9,15 @@ initially:
     [GetPath Database "simman rels data" ?relations] [set Relations = ?relations]
     [TranslateRelationshipTypes Relations]
     [DefineSlotPredicate "PersonGender" gender PersonType]
+    [DefineSlotPredicate "Dead" died PersonType]
+    [DefineSlotPredicate "WillDie" futuredeath PersonType]
+    [DefineSlotPredicate "WillMarry" futuremarriage PersonType]
+    [DefineSlotPredicate "WillHaveKids" futurekids PersonType]
+    [DefineSlotPredicate "WillHaveFriends" futurefriends PersonType]
     [DefineSlotPredicate "LastName" last PersonType]
     [DefineSlotPredicate "FirstName" first PersonType]
+    [DefineSlotPredicate "Born" born PersonType]
+    [DefineSlotPredicate "Died" died PersonType]
     [DefineSlotPredicate "PersonTraits" traits PersonType]
     [DefineSlotPredicate "Ethnicity" eth PersonType]
     [DefineIndexedSlotPredicate "OwnsBusiness" PersonType business BusinessType]
@@ -21,6 +28,18 @@ initially:
     [DefineRelationPredicateWithKey "RelationshipWithBuffs" Database PersonType buffs]
     [DefineRelationPredicateWithKey "RelationshipWithSocialHistory" Database PersonType socialhistory]
 [end]
+
+[predicate][main]
+Mom ?p ?m: [Relationship ?p ?m mother ?t]
+
+[predicate][main]
+Dad ?p ?m: [Relationship ?p ?m father ?t]
+
+[predicate][main]
+Sibling ?p ?m: [Relationship ?p ?m sibling ?t]
+
+[predicate][main]
+Child ?p ?m: [Relationship ?p ?m child ?t]
 
 [predicate][main]
 Male ?p: [PersonGender ?p male]
@@ -88,3 +107,16 @@ MurderMotive ?killer ?victim [?act ?target]: [RelationHistory ?killer ?victim ? 
 
 [predicate]
 UpsetAboutKilling ?experiencer ?killer ?victim: [RelationHistory ?experiencer ?killer ? killing\-inf ?victim ?]
+
+[predicate]
+FuneralDate ?person ?dayObject: [Dead ?person ?e][?e days ?x][set ?y = ?x + 10][Hashtable days ?y ?dayObject]
+
+[predicate][randomly]
+FavoriteActivity ?p ?act: [Person ?p][Trait ?p ?t][set ?act = "Drinking"]
+FavoriteActivity ?p ?act: [Person ?p][Trait ?p ?t][set ?act = "Partying"]
+FavoriteActivity ?p ?act: [Person ?p][Trait ?p ?t][set ?act = "Playing the Sax"]
+FavoriteActivity ?p ?act: [Person ?p][Trait ?p kind][set ?act = "volunteering at the orphanage"]
+FavoriteActivity ?p ?act: [Person ?p][Trait ?p talkative][set ?act = "talking"]
+FavoriteActivity ?p ?act: [Person ?p][Trait ?p curious][set ?act = "science"]
+FavoriteActivity ?p ?act: [Person ?p][Trait ?p curious][set ?act = "classic literature"]
+FavoriteActivity ?p ?act: [Person ?p][Trait ?p cruel][set ?act = "kicking babies"]

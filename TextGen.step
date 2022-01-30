@@ -3,7 +3,26 @@ Capitalist ?who: [OwnsBusiness ?who ?what] ?who owns ?what.
 
 Killing: [Killed ?killer ?killee] ?killer killed ?killee/Obj.  [Motive ?killer ?killee]
 
+Friendly ?p: [Trait ?p friendly] ?p is friendly.
+
 [randomly]
 Motive ? ?v: ?v had been very naughty.
 Motive ?k ?: ?k was in a super bad mood.
 Motive ?k ?v: ?k wanted one of ?v/Poss french fries and ?v wouldn't share.
+
+[predicate]
+HomocideWatch friendly ?p: [Killed ?a ?p][Trait ?p friendly] It is a travesty to what happened to ?p/FirstName/Write ?p/LastName/Write. Their remains were found in an oil drum 5 miles outside of Gary, Indiana.
+[randomly]
+HomocideWatch ?t ?p: [Killed ?a ?p][Trait ?p ?t] the remains of ?p/FirstName/Write ?p/LastName/Write was discovered today in a chared ditch sourrounded by empty Jerry Cans. Authorities are asking people to come forward with potential leads.
+HomocideWatch ?t ?p: [Killed ?a ?p][Trait ?p ?t] the remains of ?p/FirstName/Write ?p/LastName/Write was discovered today in a back alley in Englewood. Authorities are asking people to come forward with potential leads.
+
+
+PersonalMotive: [Killed ?a ?p][RelationHistory ?a ?p ?w ?x ?y ?z] It was revealed that ?a/FirstName/Write ?a/LastName/Write was resposible for the murder of ?p/FirstName/Write ?p/LastName/Write. ?a/LastName/Write motives were becuase of ?x ?p/LastName/Write imposed on ?a/Obj and ?a/Poss family.
+
+[randomly]
+Eulogies: [Dead ?p ?e][Trait ?p ?t][Born ?p ?w][FuneralDate ?p ?date][FavoriteActivity ?p ?act] In loving memeory ?p, ?w/FullDate - ?e/FullDate. No one who met ?p/FirstName/Write forgot their ?t personality and infectious passion for ?act. Funeral services will be held ?date/FullDate at noon in Old St. Patrcik's Church. Friends may visit family between 6-8pm. 
+Eulogies: [Dead ?p ?e][Trait ?p ?t][Born ?p ?w][Child ?p ?m][WillDie ?m ?d][FuneralDate ?p ?date][FavoriteActivity ?p ?act] In loving memeory ?p, ?w/FullDate - ?e/FullDate. No one who met ?p/FirstName/Write forgot their ?t personality and infectious passion for ?act. They are survived by ?m. Funeral services will be held ?date/FullDate at noon in Old St. Patrcik's Church. Friends may visit family between 6-8pm. 
+
+[randomly]
+Gossip: [RelationHistory ?Person ?Agent ?x extortion ?Person ?y] Psst... did you hear that ?Agent/FirstName/Write ?Agent/LastName/Write extorted money out of ?Person/FirstName/Write ?Person/LastName/Write.
+Gossip: [RelationHistory ?Person ?Agent father extortion ?Person ?y] Psst... did you hear that ?Agent/FirstName/Write ?Agent/LastName/Write extorted money out of ?Person/FirstName/Write ?Person/LastName/Write. Can't believe someone would do that to their own child!
