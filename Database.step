@@ -27,6 +27,7 @@ initially:
     [DefineRelationPredicate "Relationship" Database PersonType]
     [DefineRelationPredicateWithKey "RelationshipWithBuffs" Database PersonType buffs]
     [DefineRelationPredicateWithKey "RelationshipWithSocialHistory" Database PersonType socialhistory]
+    [DefineLedger "SocialAction" Database PersonType]
 [end]
 
 [predicate][main]
@@ -100,7 +101,7 @@ GangName ?g ?n: [?g social ?s] [?s groupname ?n]
 Cop ?p: [Person ?p] [?p pid ?pid] [Precinct ? ?pid]
 
 [predicate]
-Killed ?agent ?patient: [RelationHistory ?patient ?agent ? killing ?patient ?]
+Killed ?agent ?patient: [SocialAction ?agent killing ?patient ? ? ?]
 
 [predicate]
 MurderMotive ?killer ?victim [?act ?target]: [RelationHistory ?killer ?victim ? ?act ?target ?valence] [< ?valence 0]
