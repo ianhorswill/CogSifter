@@ -12,6 +12,8 @@ Mention Them: they
 Mention (Mentioned ?x): [MentionRest ?x]
 Mention ?x: [now [Mentioned ?x]] [MentionFirst ?x]
 
+
+
 # Handles the first mention of an object
 MentionFirst (Person ?x): ?x/Honorific ?x/FirstName/Write ?x/LastName/Write [NotePersonPronouns ?x] [PersonDetailClause ?x]
 MentionFirst ?x: [MentionGeneral ?x]
@@ -55,6 +57,11 @@ Obj Him: him
 Obj Her: her
 Obj Them: them
 Obj ?x: ?x
+
+Gender (Var ?x): ?x/Write
+Gender (Male ?): man
+Gender (Female ?): woman
+Gender ?: person
 
 FullDate ?d: [FormatSIONDate "MMMM dd, yyyy" ?d ?string] ?string/Write
 [main]

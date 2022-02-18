@@ -1,6 +1,8 @@
 [main]
 Capitalist ?who: [OwnsBusiness ?who ?what] ?who owns ?what.
 
+CapitalistSingle ?who: [OwnsBusiness ?who ?what] ?who
+
 Killing: [Killed ?killer ?killee] ?killer killed ?killee/Obj.  [Motive ?killer ?killee]
 
 Friendly ?p: [Trait ?p friendly] ?p is friendly.
@@ -11,18 +13,120 @@ Motive ?k ?: ?k was in a super bad mood.
 Motive ?k ?v: ?k wanted one of ?v/Poss french fries and ?v wouldn't share.
 
 [predicate]
-HomocideWatch friendly ?p: [Killed ?a ?p][Trait ?p friendly] It is a travesty to what happened to ?p/FirstName/Write ?p/LastName/Write. Their remains were found in an oil drum 5 miles outside of Gary, Indiana.
-[randomly]
-HomocideWatch ?t ?p: [Killed ?a ?p][Trait ?p ?t] the remains of ?p/FirstName/Write ?p/LastName/Write was discovered today in a chared ditch sourrounded by empty Jerry Cans. Authorities are asking people to come forward with potential leads.
-HomocideWatch ?t ?p: [Killed ?a ?p][Trait ?p ?t] the remains of ?p/FirstName/Write ?p/LastName/Write was discovered today in a back alley in Englewood. Authorities are asking people to come forward with potential leads.
-
-
-PersonalMotive: [Killed ?a ?p][RelationHistory ?a ?p ?w ?x ?y ?z] It was revealed that ?a/FirstName/Write ?a/LastName/Write was resposible for the murder of ?p/FirstName/Write ?p/LastName/Write. ?a/LastName/Write motives were becuase of ?x ?p/LastName/Write imposed on ?a/Obj and ?a/Poss family.
+HomocideWatch friendly ?p: 
+    [Killed ?a ?p][Trait ?p friendly] It is a travesty to what happened to ?p/FullName. 
+    Their remains were found in an oil drum 5 miles outside of Gary, Indiana.
+[end]
 
 [randomly]
-Eulogies: [Dead ?p ?e][Trait ?p ?t][Born ?p ?w][FuneralDate ?p ?date][FavoriteActivity ?p ?act] In loving memeory ?p, ?w/FullDate - ?e/FullDate. No one who met ?p/FirstName/Write forgot their ?t personality and infectious passion for ?act. Funeral services will be held ?date/FullDate at noon in Old St. Patrcik's Church. Friends may visit family between 6-8pm. 
-Eulogies: [Dead ?p ?e][Trait ?p ?t][Born ?p ?w][Child ?p ?m][WillDie ?m ?d][FuneralDate ?p ?date][FavoriteActivity ?p ?act] In loving memeory ?p, ?w/FullDate - ?e/FullDate. No one who met ?p/FirstName/Write forgot their ?t personality and infectious passion for ?act. They are survived by ?m. Funeral services will be held ?date/FullDate at noon in Old St. Patrcik's Church. Friends may visit family between 6-8pm. 
+HomocideWatch ?t ?p: 
+    [Killed ?a ?p][Trait ?p ?t] the remains of ?p/FullName were discovered today in a chared ditch sourrounded by empty Jerry Cans. 
+    Authorities are asking people to come forward with potential leads.
+[end]
+
+HomocideWatch ?t ?p: 
+    [Killed ?a ?p][Trait ?p ?t] the remains of ?p/FullName were discovered today in a back alley in Englewood. 
+    Authorities are asking people to come forward with potential leads.
+[end]
+
+
+PersonalMotive: 
+    [Killed ?a ?p][RelationHistory ?a ?p ?w ?x ?y ?z] It was revealed that ?a/FullName was resposible for the murder of 
+    ?p/FullName. ?a/LName motives were becuase of ?x ?p/LName imposed on ?a/Obj and ?a/Poss family.
+[end]
 
 [randomly]
-Gossip: [RelationHistory ?Person ?Agent ?x extortion ?Person ?y] Psst... did you hear that ?Agent/FirstName/Write ?Agent/LastName/Write extorted money out of ?Person/FirstName/Write ?Person/LastName/Write.
-Gossip: [RelationHistory ?Person ?Agent father extortion ?Person ?y] Psst... did you hear that ?Agent/FirstName/Write ?Agent/LastName/Write extorted money out of ?Person/FirstName/Write ?Person/LastName/Write. Can't believe someone would do that to their own child!
+Eulogies: 
+    [Dead ?p ?e][Trait ?p ?t][Born ?p ?w][FuneralDate ?p ?date][FavoriteActivity ?p ?act] In loving memeory ?p, ?w/FullDate - ?e/FullDate. 
+    No one who met ?p/FName forgot their ?t personality and infectious passion for ?act. 
+    Funeral services will be held ?date/FullDate at noon in Old St. Patrcik's Church. Friends may visit family between 6-8pm. 
+[end]
+
+Eulogies: 
+    [Dead ?p ?e][Trait ?p ?t][Born ?p ?w][Child ?p ?m][WillDie ?m ?d][FuneralDate ?p ?date][FavoriteActivity ?p ?act] In loving memeory ?p, ?w/FullDate - ?e/FullDate. 
+    No one who met ?p/FName forgot their ?t personality and infectious passion for ?act. They are survived by ?m. 
+    Funeral services will be held ?date/FullDate at noon in Old St. Patrcik's Church. Friends may visit family between 6-8pm. 
+[end]
+
+[randomly]
+News ?Person vandalism: 
+    [Vandalised ?Person ?Agent ?Relation] A ?Person/Gender had their business vandalised today. 
+    [CapitalistSingle ?Person] had their building broken into and lost over $1000 in product and cash.  
+    The destruction of the property is estimated to be at over $2000. The person resposible was believed to be ?Agent. 
+    If you have any leads as to who it may be please contact local authorities.
+[end]
+
+News ?Person burglary: 
+    [Burglary ?Person ?Agent ?Relation] A ?Person/Gender had their business invaded today. 
+    [CapitalistSingle ?Person] had their building broken into and lost over $1000 in product and cash. 
+    The person resposible was believed to be ?Agent.
+    If you have any leads as to who it may be please contact local authorities.
+[end]
+
+News ?Person violence: 
+    [Violence ?Person ?Agent ?Relation] A ?Person/Gender had been a victim of a brutal attack today. 
+    ?Person was struck mutiple times by an unknown assailant breaking multiple bones and leaving ?Person/FirstName with many laserations. 
+    The person resposible was believed to be ?Agent. 
+    If you have any leads as to who it may be please contact local authorities.
+[end]
+
+[randomly]
+Gossip ?Person vandalism: 
+    [Vandalised ?Person ?Agent ?Relation] Psst... did you hear that ?Agent/FullName
+    damaged property from ?Person/FullName.
+[end]
+
+Gossip ?Person burglary: 
+    [Burglary ?Person ?Agent ?Relation] Psst... did you hear that ?Agent/FullName stole money out of ?Person/FullName.
+[end]
+
+Gossip ?Person violence: 
+    [Violence ?Person ?Agent ?Relation] Psst... did you hear that ?Agent/FullName 
+    ended up beating the Hell out of ?Person/FullName.
+[end]
+
+Gossip ?Person extortion: 
+    [Extortion ?Person ?Agent ?Relation] Psst... did you hear that ?Agent/FullName
+    extorted money out of ?Person/FullName. Can't believe someone would do that to their own child!
+[end]
+
+Gossip ?Person extortion: 
+    [Extortion ?Person ?Agent father] Psst... did you hear that ?Agent/FullName
+    extorted money out of ?Person/FullName. Can't believe someone would do that to their own child!
+[end]
+
+[randomly]
+Exerb violence:
+    They turn the corner to see two people tussling. It was like two apes going at it. 
+    Both getting hit with thunder and lightning. Trash cans falling, dogs barking, stray cats meowing in terror over the property damage. 
+    It then aburbtly stopped when one of them pulled a knife and lunged at the other into a street light. Bright as day you could see who those two people where.
+[end]
+
+Exerb burglary:
+    They ran out to see what the fuss was about and saw a group of shadows going into the building and cleaning out everything. 
+    It was like watching ants finding food. They would have probably stolen the door too if they didn't smash it in.
+[end]
+
+Exerb vandalism:
+    Then another, Then another. 
+    It sounded like a circus over there. A bunch of hooligans running a muck. 
+    They were breaking things, stealing things, stealing broken things, breaking stolen goods. Nothing was off limits.
+[end]
+
+[randomly]
+Story: 
+    [Gossip ?p vandalism] It's true I swear. Happened about a day ago or two. 
+    My neighbor was out smoking when they over heard a noise. [Exerb vandalism] *News cast starts* In today's news [News ?p vandalism]. See! What did I tell ya?!
+[end]
+
+Story: 
+    [Gossip ?p burglary] It's true I swear. 
+    Happened about a day ago or two. My neighbor was out smoking when they over heard a noise. 
+    [Exerb burglary] *News cast starts* In today's news [News ?p burglary]. See! What did I tell ya?!
+[end]
+
+Story: 
+    [Gossip ?p violence] It's true I swear. 
+    Happened about a day ago or two. My neighbor was out smoking when they over heard a noise. 
+    [Exerb violence] *News cast starts* In today's news [News ?p violence]. See! What did I tell ya?!
+[end]

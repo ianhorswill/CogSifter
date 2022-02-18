@@ -16,7 +16,7 @@ initially:
     [DefineSlotPredicate "WillHaveFriends" futurefriends PersonType]
     [DefineSlotPredicate "LastName" last PersonType]
     [DefineSlotPredicate "FirstName" first PersonType]
-    [DefineSlotPredicate "Born" born PersonType]
+    [DefineSlotPredicate "Born" born  PersonType]
     [DefineSlotPredicate "Died" died PersonType]
     [DefineSlotPredicate "PersonTraits" traits PersonType]
     [DefineSlotPredicate "Ethnicity" eth PersonType]
@@ -28,7 +28,25 @@ initially:
     [DefineRelationPredicateWithKey "RelationshipWithBuffs" Database PersonType buffs]
     [DefineRelationPredicateWithKey "RelationshipWithSocialHistory" Database PersonType socialhistory]
     [DefineLedger "SocialAction" Database PersonType]
+    [DefineSlotPredicate "Modules" modules BusinessType]
 [end]
+
+[predicate] [randomly]
+Creature dragon.
+Creature mimick.
+Creature goblin.
+[predicate] [randomly]
+DragonType fire.
+DragonType water.
+DragonType wind.
+DragonType earth.
+[predicate] [randomly]
+DragonHealth 200.
+DragonHealth 100.
+DragonHealth 50.
+
+[predicate][main]
+MakeDragon: [DragonType ?t][DragonHealth ?h] There is a ?t dragon with ?h health.
 
 [predicate][main]
 Mom ?p ?m: [Relationship ?p ?m mother ?t]
@@ -113,11 +131,33 @@ UpsetAboutKilling ?experiencer ?killer ?victim: [RelationHistory ?experiencer ?k
 FuneralDate ?person ?dayObject: [Dead ?person ?e][?e days ?x][set ?y = ?x + 10][Hashtable days ?y ?dayObject]
 
 [predicate][randomly]
-FavoriteActivity ?p ?act: [Person ?p][Trait ?p ?t][set ?act = "Drinking"]
-FavoriteActivity ?p ?act: [Person ?p][Trait ?p ?t][set ?act = "Partying"]
-FavoriteActivity ?p ?act: [Person ?p][Trait ?p ?t][set ?act = "Playing the Sax"]
-FavoriteActivity ?p ?act: [Person ?p][Trait ?p kind][set ?act = "volunteering at the orphanage"]
-FavoriteActivity ?p ?act: [Person ?p][Trait ?p talkative][set ?act = "talking"]
-FavoriteActivity ?p ?act: [Person ?p][Trait ?p curious][set ?act = "science"]
-FavoriteActivity ?p ?act: [Person ?p][Trait ?p curious][set ?act = "classic literature"]
-FavoriteActivity ?p ?act: [Person ?p][Trait ?p cruel][set ?act = "kicking babies"]
+FavoriteActivity ?p drinking: [Person ?p]
+FavoriteActivity ?p partying: [Person ?p]
+FavoriteActivity ?p "playing the sax": [Person ?p]
+FavoriteActivity ?p "volunteering at the orphanage": [Person ?p][Trait ?p kind]
+FavoriteActivity ?p talking: [Person ?p][Trait ?p talkative]
+FavoriteActivity ?p science: [Person ?p][Trait ?p curious]
+FavoriteActivity ?p "classic literature": [Person ?p][Trait ?p curious]
+FavoriteActivity ?p "kicking babies": [Person ?p][Trait ?p cruel]
+
+[predicate][randomly]
+Extortion ?Person ?Agent ?Relation: [RelationHistory ?Person ?Agent ?x extortion ?Person ?y]
+Extortion ?Person ?Agent father: [RelationHistory ?Person ?Agent father extortion ?Person ?y]
+
+[predicate]
+Vandalised ?Person ?Agent ?Relation: [RelationHistory ?Person ?Agent ?r vandalism ?P ?y]
+
+[predicate]
+Burglary ?Person ?Agent ?Relation: [RelationHistory ?Person ?Agent ?r burglary ?P ?y]
+
+[predicate]
+Violence ?Person ?Agent ?Relation: [RelationHistory ?Person ?Agent ?r violence ?P ?y] 
+
+[predicate]
+FName ?person: ?p/FirstName/Write
+
+[predicate]
+LName ?person: ?p/LastName/Write
+
+[predicate]
+FullName ?person: ?p/FirstName/Write ?p/LastName/Write
