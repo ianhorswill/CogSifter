@@ -31,23 +31,6 @@ initially:
     [DefineSlotPredicate "Modules" modules BusinessType]
 [end]
 
-[predicate] [randomly]
-Creature dragon.
-Creature mimick.
-Creature goblin.
-[predicate] [randomly]
-DragonType fire.
-DragonType water.
-DragonType wind.
-DragonType earth.
-[predicate] [randomly]
-DragonHealth 200.
-DragonHealth 100.
-DragonHealth 50.
-
-[predicate][main]
-MakeDragon: [DragonType ?t][DragonHealth ?h] There is a ?t dragon with ?h health.
-
 [predicate][main]
 Mom ?p ?m: [Relationship ?p ?m mother ?t]
 
