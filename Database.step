@@ -9,8 +9,15 @@ initially:
     [GetPath Database "simman rels data" ?relations] [set Relations = ?relations]
     [TranslateRelationshipTypes Relations]
     [DefineSlotPredicate "PersonGender" gender PersonType]
+    [DefineSlotPredicate "Dead" died PersonType]
+    [DefineSlotPredicate "WillDie" futuredeath PersonType]
+    [DefineSlotPredicate "WillMarry" futuremarriage PersonType]
+    [DefineSlotPredicate "WillHaveKids" futurekids PersonType]
+    [DefineSlotPredicate "WillHaveFriends" futurefriends PersonType]
     [DefineSlotPredicate "LastName" last PersonType]
     [DefineSlotPredicate "FirstName" first PersonType]
+    [DefineSlotPredicate "Born" born  PersonType]
+    [DefineSlotPredicate "Died" died PersonType]
     [DefineSlotPredicate "PersonTraits" traits PersonType]
     [DefineSlotPredicate "Ethnicity" eth PersonType]
     [DefineIndexedSlotPredicate "OwnsBusiness" PersonType business BusinessType]
@@ -21,7 +28,20 @@ initially:
     [DefineRelationPredicateWithKey "RelationshipWithBuffs" Database PersonType buffs]
     [DefineRelationPredicateWithKey "RelationshipWithSocialHistory" Database PersonType socialhistory]
     [DefineLedger "SocialAction" Database PersonType]
+    [DefineSlotPredicate "Modules" modules BusinessType]
 [end]
+
+[predicate][main]
+Mom ?p ?m: [Relationship ?p ?m mother ?t]
+
+[predicate][main]
+Dad ?p ?m: [Relationship ?p ?m father ?t]
+
+[predicate][main]
+Sibling ?p ?m: [Relationship ?p ?m sibling ?t]
+
+[predicate][main]
+Child ?p ?m: [Relationship ?p ?m child ?t]
 
 [predicate][main]
 Male ?p: [PersonGender ?p male]
@@ -90,5 +110,40 @@ Killed ?agent ?patient: [SocialAction ?agent killing ?patient ? ? ?]
 [predicate] [main]
 MurderMotive ?killer ?victim [?act ?target]: [RelationHistory ?killer ?victim ? ?act ?target ?valence] [< ?valence 0]
 
-[predicate] [main]
+[predicate]
 UpsetAboutKilling ?experiencer ?killer ?victim: [RelationHistory ?experiencer ?killer ? killing\-inf ?victim ?]
+
+[predicate]
+FuneralDate ?person ?dayObject: [Dead ?person ?e][?e days ?x][set ?y = ?x + 10][Hashtable days ?y ?dayObject]
+
+[predicate][randomly]
+FavoriteActivity ?p drinking: [Person ?p]
+FavoriteActivity ?p partying: [Person ?p]
+FavoriteActivity ?p "playing the sax": [Person ?p]
+FavoriteActivity ?p "volunteering at the orphanage": [Person ?p][Trait ?p kind]
+FavoriteActivity ?p talking: [Person ?p][Trait ?p talkative]
+FavoriteActivity ?p science: [Person ?p][Trait ?p curious]
+FavoriteActivity ?p "classic literature": [Person ?p][Trait ?p curious]
+FavoriteActivity ?p "kicking babies": [Person ?p][Trait ?p cruel]
+
+[predicate][randomly]
+Extortion ?Person ?Agent ?Relation: [RelationHistory ?Person ?Agent ?x extortion ?Person ?y]
+Extortion ?Person ?Agent father: [RelationHistory ?Person ?Agent father extortion ?Person ?y]
+
+[predicate]
+Vandalised ?Person ?Agent ?Relation: [RelationHistory ?Person ?Agent ?r vandalism ?P ?y]
+
+[predicate]
+Burglary ?Person ?Agent ?Relation: [RelationHistory ?Person ?Agent ?r burglary ?P ?y]
+
+[predicate]
+Violence ?Person ?Agent ?Relation: [RelationHistory ?Person ?Agent ?r violence ?P ?y] 
+
+[predicate]
+FName ?person: ?p/FirstName/Write
+
+[predicate]
+LName ?person: ?p/LastName/Write
+
+[predicate]
+FullName ?person: ?p/FirstName/Write ?p/LastName/Write

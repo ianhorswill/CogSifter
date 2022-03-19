@@ -1,0 +1,90 @@
+keyboard shortcuts
+
+\		hide the ui
+TAB		select the next crew member (double-tap to also center camera)
+SPACE	next turn
+/ 		open console
+ESC		close topmost dialog or console
+
+
+
+
+list of console cheats
+
+once you open the console with "/", use up/down arrows
+to scroll through history, TAB to auto-complete, ESC to close
+
+for example type "heatmap " + TAB to get a list of heatmaps,
+"resources add " + TAB to get a list of resources to grant, etc
+(NOTE: that space before TAB is important! otherwise it will try to
+autocomplete the previous word, instead of listing next possible words)
+
+
+heatmap off
+heatmap appeal					- how appealing a given area is
+heatmap building 				- show building density (medium and large lots)
+heatmap lotzone {res|com|ind}	- show how lots got zoned during procgen
+heatmap density {res|com|ind}   - show density of each zone after everybody moved in
+heatmap rails					- show rail influence
+heatmap eth <ethnicity-id>		- show ethnicity density for a given ethnicity
+
+overlay off
+overlay building {res|com|ind}  - force an overlay of given building type
+overlay ethnicity <eth-id>  	- force an overlay of given ethnicity
+overlay orders-show				- force an overlay to show all orders
+
+player set-invincible			- god mode, human player crew will take no damage
+player reset-invincible			- remove god mode
+
+crew add-crew					- add a new crew member without increasing total cap
+crew kill-crew <crew-#>			- kills the specified crew member (zero-indexed)
+crew increase-cap <delta>		- increases crew cap 
+crew grant-vehicle <name>		- adds an unassigned vehicle of given name
+crew set-points <#> <act> <mv>	- sets given crew member # to have specified action and movement points
+crew set-xp <crew-#> <value>	- sets xp for given crew member
+crew add-xp <crew-#> <delta>	- adds xp for given crew member
+crew set-crew-health <#> <value>     - set crew peep health to given value in range [0, 100]
+crew set-vehicle-health <#> <value>  - set crew vehicle health to given value in range [0, 100]
+
+motherlode						- adds $50,000 to first crew member's vehicle
+finances add-cash <amount>		- adds specified amount to first crew member vehicle
+finances remove-cash <amount>	- removes specified amount from first crew member vehicle
+
+skills add <skill-id>			- grants the specified skill to player's crew
+skills remove <skill-id>		- removes the specified skill from player's crew
+
+resources unlock <resource-id>	- unlocks specified resource
+resources add <res-id> <delta>  - increments / decrements this resource in player's safehouse
+
+reveal all-buildings			- marks all buildings as visited
+reveal no-buildings				- marks all buildings as not visited
+reveal template <template-id>   - marks buildings with specific business as visited
+reveal module <module-id>		- marks buildings based on module id
+reveal taggedmodule <module-id> - marks buildings based on module tag
+reveal player-existence <player-id>	- introduces the human player to the specified ai
+
+scopeout all					- marks all businesses as scoped out (even if not yet visited)
+scopeout none					- marks all businesses as not scoped out (probably broken, sry)
+
+territory add-at-crew <crew-#>		- adds the given crew's current corner to player territory
+territory remove-at-crew <crew-#>	- removes the given crew's current corner from territory
+territory make-all-mine				- adds all unowned corners to player territory
+territory set-building-health <entity-index> <value> - sets building health to value in range [0, 100]
+
+respect increment-at-crew <crew-#> <amount> - grants respect at given crew's current location
+
+convo add-buff <buff-id>			- during conversation: adds a specified relationship buff
+convo remove-buff <buff-id>			- during conversation: removes the relationship buff
+convo add-tickets <#-of-tickets>	- during conversation: grants extra favors with the npc
+
+visual season <day-of-year>		- for display testing only, forces the visual date to given day of year (-1 to turn off)
+visual hour <hour-of-day>		- for display testing only, forces the visual time to given hour of day (-1 to turn off)
+visual weather {snow|rain|dust|none|reset} - for display testing only, forces weather fx
+
+find entity <index>				- finds and zooms the camera to entity with given index
+                                  (if entity id is E2_123 then index is the 123 part)
+
+ai grant-free-skills			- every gang gets a skill upgrade for free
+ai send-feds-at-crew <crew-#>   - sends feds to investigate at that crew member's current corner
+ai arrest-somebody <player-#>   - sends cops to arrest someone from that player's crew
+ai log-history-ledger           - enable expanded logging of social actions and ai events
